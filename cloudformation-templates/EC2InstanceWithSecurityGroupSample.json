@@ -7,7 +7,8 @@
     "KeyName": {
       "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instance",
       "Type": "AWS::EC2::KeyPair::KeyName",
-      "ConstraintDescription" : "must be the name of an existing EC2 KeyPair."
+      "ConstraintDescription" : "must be the name of an existing EC2 KeyPair.",
+      "Default" : "vs_vm"
     },
 
     "InstanceType" : {
@@ -172,7 +173,7 @@
       "Properties" : {
         "InstanceType" : { "Ref" : "InstanceType" },
         "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
-        "KeyName" : { "Ref" : "vs_vm" },
+        "KeyName" : { "Ref" : "KeyName" },
         "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
                           { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "InstanceType" }, "Arch" ] } ] }
       }
